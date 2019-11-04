@@ -1,9 +1,8 @@
 package com.need.unknown.component.adapter;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.ColorStateList;
-import android.graphics.PorterDuff;
+import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -13,7 +12,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.need.unknown.R;
-import com.need.unknown.component.model.MenuModel;
+import com.need.unknown.component.model.ModelMenu;
+import com.need.unknown.view.MainView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,18 +22,21 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class BarAdapter extends RecyclerView.Adapter<BarAdapter.ViewHolder> {
-    List<MenuModel> menuModels;
+    List<ModelMenu> modelMenus;
     Context mContext;
+    MainView mainView;
     private int selected;
 
-    public BarAdapter(Context context) {
+    public BarAdapter(Context context, MainView mainView) {
         mContext = context;
-        menuModels = new ArrayList<>();
-        menuModels.add(new MenuModel(R.drawable.ic_home_black_24dp, "Home"));
-        menuModels.add(new MenuModel(R.drawable.ic_inbox_black_24dp, "Inbox"));
-        menuModels.add(new MenuModel(R.drawable.ic_need_logo_dark, "Buy"));
-        menuModels.add(new MenuModel(R.drawable.ic_history_black_24dp, "History"));
-        menuModels.add(new MenuModel(R.drawable.ic_person_black_24dp, "Me"));
+        this.mainView = mainView;
+        modelMenus = new ArrayList<>();
+        modelMenus.add(new ModelMenu(R.drawable.ic_home_black_24dp, "Home", 0));
+        modelMenus.add(new ModelMenu(R.drawable.ic_inbox_black_24dp, "Inbox", 1));
+        modelMenus.add(new ModelMenu(R.drawable.ic_need_logo_dark, "Buy", 5));
+        modelMenus.add(new ModelMenu(R.drawable.ic_history_black_24dp, "History", 2));
+        modelMenus.add(new ModelMenu(R.drawable.ic_person_black_24dp, "Me", 3));
+        select(modelMenus.get(0).getOrder(), 0);
     }
 
     @NonNull
@@ -44,12 +47,12 @@ public class BarAdapter extends RecyclerView.Adapter<BarAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.bind(menuModels.get(position), position);
+        holder.bind(modelMenus.get(position), position);
     }
 
     @Override
     public int getItemCount() {
-        return menuModels.size();
+        return modelMenus.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -63,26 +66,35 @@ public class BarAdapter extends RecyclerView.Adapter<BarAdapter.ViewHolder> {
             ButterKnife.bind(this, itemView);
         }
 
-        public void bind(MenuModel menuModel, final int position) {
-            icon.setImageResource(menuModel.getIcon());
-            title.setText(menuModel.getTitle());
-            icon.setImageTintList(ColorStateList.valueOf(mContext.getResources().getColor(menuModel.isSelected() ? R.color.logoColor : R.color.grey_400)));
-            title.setTextColor(mContext.getResources().getColor(menuModel.isSelected() ? R.color.logoColor : R.color.grey_400));
+        public void bind(ModelMenu modelMenu, final int position) {
+            icon.setImageResource(modelMenu.getIcon());
+            title.setText(modelMenu.getTitle());
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                icon.setImageTintList(ColorStateList.valueOf(mContext.getResources().getColor(modelMenu.isSelected() ? R.color.logoColor : R.color.grey_400)));
+            }
+            title.setTextColor(mContext.getResources().getColor(modelMenu.isSelected() ? R.color.logoColor : R.color.grey_400));
             View view = (View) icon.getParent();
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    select(position);
+                    select(modelMenu.getOrder(), position);
                 }
             });
         }
     }
 
-    private void select(int position) {
-        menuModels.get(selected).setSelected(false);
-        menuModels.get(position).setSelected(true);
-        notifyItemChanged(selected);
-        notifyItemChanged(position);
-        selected = position;
+    private void select(int order, int position) {
+        mainView.selectFragment(order);
+        switch (position) {
+            case 2:
+                return;
+            default:
+                modelMenus.get(selected).setSelected(false);
+                modelMenus.get(position).setSelected(true);
+                notifyItemChanged(selected);
+                notifyItemChanged(position);
+                selected = position;
+                break;
+        }
     }
 }

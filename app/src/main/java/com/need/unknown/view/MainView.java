@@ -5,4 +5,5 @@ import android.support.annotation.UiThread;
 @UiThread
 public interface MainView {
 
+    void selectFragment(int position);
 }

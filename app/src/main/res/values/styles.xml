@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light">
@@ -10,6 +10,23 @@
         <item name="actionBarStyle">@style/AppTheme.AppActionBar</item>
         <item name="android:windowBackground">@color/grey_200</item>
         <item name="android:actionBarStyle">@style/AppTheme.AppActionBar</item>
+        <item name="android:font" tools:targetApi="o">@font/font_family</item>
+        <item name="android:fontFamily">@font/font_family</item>
+    </style>
+
+    <style name="LoginTheme" parent="NoActionTheme">
+        <item name="android:windowBackground">@color/white</item>
+    </style>
+
+    <style name="NoActionTheme" parent="AppTheme">
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowNoTitle">true</item>
+    </style>
+
+    <style name="DialogStyle" parent="Theme.Design.Light.BottomSheetDialog">
+        <item name="android:windowIsFloating">false</item>
+        <item name="android:statusBarColor" tools:targetApi="lollipop">@android:color/transparent</item>
+        <item name="android:windowSoftInputMode">adjustResize</item>
     </style>
 
     <style name="AppTheme.AppActionBar" parent="@style/Widget.AppCompat.ActionBar">
@@ -21,6 +38,8 @@
 
     <style name="AppTheme.AppActionBar.TitleTextStyle" parent="@style/TextAppearance.AppCompat.Widget.ActionBar.Title">
         <item name="android:textStyle">bold</item>
+        <item name="android:font" tools:targetApi="o">@font/font_family</item>
+        <item name="android:fontFamily">@font/font_family</item>
     </style>
 
     <style name="SplashTheme" parent="AppTheme">

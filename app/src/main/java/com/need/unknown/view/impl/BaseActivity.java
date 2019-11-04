@@ -3,19 +3,25 @@ package com.need.unknown.view.impl;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
 import android.support.v7.app.AppCompatActivity;
+import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.need.unknown.NeedApp;
+import com.need.unknown.component.model.DataUser;
+import com.need.unknown.component.model.ResponseNetworkError;
 import com.need.unknown.presenter.loader.PresenterFactory;
 import com.need.unknown.presenter.loader.PresenterLoader;
 import com.need.unknown.injection.AppComponent;
 import com.need.unknown.presenter.BasePresenter;
+import com.need.unknown.view.BaseView;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 
-public abstract class BaseActivity<P extends BasePresenter<V>, V> extends AppCompatActivity implements LoaderManager.LoaderCallbacks<P> {
+public abstract class BaseActivity<P extends BasePresenter<V>, V> extends AppCompatActivity implements LoaderManager.LoaderCallbacks<P>, BaseView {
     /**
      * Do we need to call {@link #doStart()} from the {@link #onLoadFinished(Loader, BasePresenter)} method.
      * Will be true if presenter wasn't loaded when {@link #onStart()} is reached
@@ -30,16 +36,26 @@ public abstract class BaseActivity<P extends BasePresenter<V>, V> extends AppCom
      * Is this the first start of the activity (after onCreate)
      */
     private boolean mFirstStart;
+    public NeedApp myApp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         mFirstStart = true;
-
+        myApp = (NeedApp) getApplication();
         injectDependencies();
 
         getSupportLoaderManager().initLoader(0, null, this).startLoading();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            default:
+                super.onBackPressed();
+                return true;
+        }
     }
 
     private void injectDependencies() {
@@ -47,14 +63,43 @@ public abstract class BaseActivity<P extends BasePresenter<V>, V> extends AppCom
     }
 
     @Override
+    public void presenterReady(DataUser userData) {
+
+    }
+
+    @Override
     protected void onStart() {
         super.onStart();
-
         if (mPresenter == null) {
             mNeedToCallStart.set(true);
         } else {
             doStart();
         }
+    }
+
+    @Override
+    public void onProgress() {
+
+    }
+
+    @Override
+    public <T> void onSuccess(T object) {
+
+    }
+
+    @Override
+    public void onFailure(ResponseNetworkError networError) {
+
+    }
+
+    @Override
+    public void onFailure(String message) {
+        Toast.makeText(myApp, message, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void updateNetwork(long totalBytesRead, long contentLength, boolean b) {
+
     }
 
     /**
@@ -63,11 +108,8 @@ public abstract class BaseActivity<P extends BasePresenter<V>, V> extends AppCom
     @SuppressWarnings("unchecked")
     private void doStart() {
         assert mPresenter != null;
-
-        mPresenter.onViewAttached((V) this);
-
+        mPresenter.onViewAttached((V) this, myApp);
         mPresenter.onStart(mFirstStart);
-
         mFirstStart = false;
     }
 
@@ -75,7 +117,6 @@ public abstract class BaseActivity<P extends BasePresenter<V>, V> extends AppCom
     protected void onStop() {
         if (mPresenter != null) {
             mPresenter.onStop();
-
             mPresenter.onViewDetached();
         }
 

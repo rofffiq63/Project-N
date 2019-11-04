@@ -4,4 +4,11 @@
     <string name="text_schedules">Schedules</string>
     <string name="text_music">Music</string>
     <string name="text_home">Home</string>
+    <string name="login_welcome">Selamat datang di Need Indonesia.</string>
+    <string name="dummy_text" translatable="false">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec at tortor scelerisque libero tincidunt elementum. Donec et mattis sem, luctus vehicula leo. Suspendisse potenti. Proin vitae ullamcorper ligula. Nullam et vestibulum purus. Quisque vel nisl sed nisi mollis molestie et vitae ligula. Mauris lobortis, nisl in ullamcorper placerat, nibh dolor feugiat arcu, ut semper tortor mauris vel nisl. \n\nInterdum et malesuada fames ac ante ipsum primis in faucibus. Nullam dapibus eget turpis vitae dictum. Praesent tincidunt fringilla viverra. Vivamus efficitur lorem aliquam fringilla congue. Quisque mattis velit sed mauris euismod laoreet. Sed mattis metus diam, non sagittis dolor aliquam nec. Cras tincidunt vitae enim at rhoncus. Praesent tincidunt pretium sem. Proin facilisis laoreet sapien. Ut ut augue imperdiet, interdum tortor vel, euismod libero. Praesent vel tempor neque. Donec nisl dui, semper a sem ut, finibus cursus felis. Proin a aliquam tortor. Integer egestas arcu ligula, vitae sodales risus egestas eu. Etiam pretium rutrum laoreet. Quisque et risus eget ante gravida mattis.</string>
+
+
+    <string name="freshchat_file_provider_authority" translatable="false">com.amanahcorp.bisatopup.provider</string>
+    <string name="pref_firebase_instance_id_key" translatable="false">pref_firebase_instance_id</string>
+    <string name="pref_firebase_instance_id_default_key" translatable="false">default</string>
 </resources>

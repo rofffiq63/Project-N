@@ -8,14 +8,17 @@ import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
 
 import com.need.unknown.NeedApp;
+import com.need.unknown.component.model.DataUser;
+import com.need.unknown.component.model.ResponseNetworkError;
 import com.need.unknown.presenter.loader.PresenterFactory;
 import com.need.unknown.presenter.loader.PresenterLoader;
 import com.need.unknown.injection.AppComponent;
 import com.need.unknown.presenter.BasePresenter;
+import com.need.unknown.view.BaseView;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 
-public abstract class BaseFragment<P extends BasePresenter<V>, V> extends Fragment implements LoaderManager.LoaderCallbacks<P> {
+public abstract class BaseFragment<P extends BasePresenter<V>, V> extends Fragment implements LoaderManager.LoaderCallbacks<P>, BaseView {
     /**
      * Do we need to call {@link #doStart()} from the {@link #onLoadFinished(Loader, BasePresenter)} method.
      * Will be true if presenter wasn't loaded when {@link #onStart()} is reached
@@ -52,6 +55,11 @@ public abstract class BaseFragment<P extends BasePresenter<V>, V> extends Fragme
     }
 
     @Override
+    public void presenterReady(DataUser userData) {
+
+    }
+
+    @Override
     public void onStart() {
         super.onStart();
 
@@ -62,6 +70,31 @@ public abstract class BaseFragment<P extends BasePresenter<V>, V> extends Fragme
         }
     }
 
+    @Override
+    public void onProgress() {
+
+    }
+
+    @Override
+    public <T> void onSuccess(T object) {
+
+    }
+
+    @Override
+    public void onFailure(ResponseNetworkError networError) {
+
+    }
+
+    @Override
+    public void onFailure(String message) {
+
+    }
+
+    @Override
+    public void updateNetwork(long totalBytesRead, long contentLength, boolean b) {
+
+    }
+
     /**
      * Call the presenter callbacks for onStart
      */
@@ -69,7 +102,7 @@ public abstract class BaseFragment<P extends BasePresenter<V>, V> extends Fragme
     private void doStart() {
         assert mPresenter != null;
 
-        mPresenter.onViewAttached((V) this);
+        mPresenter.onViewAttached((V) this, ((BaseActivity) getActivity()).myApp);
 
         mPresenter.onStart(mFirstStart);
 

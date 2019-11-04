@@ -2,6 +2,9 @@ package com.need.unknown.presenter;
 
 import android.support.annotation.NonNull;
 
+import com.need.unknown.NeedApp;
+import com.need.unknown.view.BaseView;
+
 public interface BasePresenter<V> {
     /**
      * Called when the view is attached to the presenter. Presenters should normally not use this
@@ -9,7 +12,7 @@ public interface BasePresenter<V> {
      *
      * @param view the view
      */
-    void onViewAttached(@NonNull V view);
+    void onViewAttached(@NonNull V view, NeedApp needApp);
 
     /**
      * Called every time the view starts, the view is guarantee to be not null starting at this
@@ -36,4 +39,6 @@ public interface BasePresenter<V> {
      * any resource used by the presenter (cancel HTTP requests, close database connection...).
      */
     void onPresenterDestroyed();
+
+    void getProfile(BaseView baseView, boolean fromCache);
 }
