@@ -3,7 +3,7 @@ apply plugin: 'com.android.application'
 android {
     signingConfigs {
         debug {
-            storeFile file('W:\\Softwares\\Android\\AndroidStudioProject\\Project-N\\need_debug.jks')
+            storeFile file('C:\\Users\\Cat\\AndroidStudioProject\\ProjectNeed\\need_debug.jks')
             storePassword 'need2019'
             keyAlias = 'needkey'
             keyPassword 'need2019'

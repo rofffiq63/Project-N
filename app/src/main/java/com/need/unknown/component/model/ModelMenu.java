@@ -20,12 +20,13 @@ public class ModelMenu {
 
     int order;
 
-    public ModelMenu(String header, String title, String subTitle, String menuInfo, int icon) {
+    public ModelMenu(String header, String title, String subTitle, String menuInfo, int icon, int order) {
         this.header = header;
         this.title = title;
         this.subTitle = subTitle;
         this.menuInfo = menuInfo;
         this.icon = icon;
+        this.order = order;
     }
 
     public ModelMenu(@DrawableRes int ic_need_logo_dark, String home, int i) {

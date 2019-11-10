@@ -45,7 +45,7 @@ public final class InboxFragment extends BaseFragment<InboxPresenter, InboxView>
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_inbox, container, false);
         unbinder = ButterKnife.bind(this, view);
-        emptyState.builder(R.drawable.ic_wip, "Work In Progress", "Sorry :( we're under construction");
+        emptyState.builder(R.drawable.empty_inbox_asset, "Empty!", "News about need will appear here");
         return view;
     }
 

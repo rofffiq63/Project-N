@@ -44,8 +44,7 @@ public final class ProfileFragment extends BaseFragment<ProfilePresenter, Profil
     TextView phoneNumber;
     @BindView(R.id.menuList)
     RecyclerView menuList;
-    @BindView(R.id.toolbar)
-    Toolbar toolbar;
+
     private FirebaseAuth mAuth;
     private FirebaseUser user;
 
@@ -59,19 +58,6 @@ public final class ProfileFragment extends BaseFragment<ProfilePresenter, Profil
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
         unbinder = ButterKnife.bind(this, view);
-        toolbar.inflateMenu(R.menu.home_menu);
-        toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                switch (item.getItemId()) {
-                    case R.id.action_help:
-                        startActivity(new Intent(getContext(), CustomerServiceActivity.class));
-                        break;
-                }
-                return false;
-            }
-        });
-
         return view;
     }
 
@@ -81,6 +67,9 @@ public final class ProfileFragment extends BaseFragment<ProfilePresenter, Profil
         mAuth = FirebaseAuth.getInstance();
         user = mAuth.getCurrentUser();
 
+        username.setText(user.getDisplayName());
+        email.setText(user.getEmail());
+        phoneNumber.setText(user.getPhoneNumber());
 //        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(menuList.getContext(),
 //                ((LinearLayoutManager) menuList.getLayoutManager()).getOrientation());
 //        menuList.addItemDecoration(dividerItemDecoration);

@@ -45,7 +45,8 @@ public final class HomeFragment extends BaseFragment<HomePresenter, HomeView> im
     RecyclerView promoList;
     @BindView(R.id.indicator)
     CircleIndicator2 indicator;
-
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
     Unbinder unbinder;
 
     // Your presenter is available using the mPresenter variable
@@ -58,6 +59,25 @@ public final class HomeFragment extends BaseFragment<HomePresenter, HomeView> im
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         unbinder = ButterKnife.bind(this, view);
+        toolbar.inflateMenu(R.menu.home_menu);
+        toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.action_help:
+                        startActivity(new Intent(getContext(), CustomerServiceActivity.class));
+                        break;
+                }
+                return false;
+            }
+        });
+
+        topupButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getContext(), TopupActivity.class));
+            }
+        });
         return view;
     }
 

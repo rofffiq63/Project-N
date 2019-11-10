@@ -56,7 +56,7 @@ public final class HistoryFragment extends BaseFragment<HistoryPresenter, Histor
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_history, container, false);
         unbinder = ButterKnife.bind(this, view);
-        emptyState.builder(R.drawable.ic_wip, "Work In Progress", "Sorry :( we're under construction");
+        emptyState.builder(R.drawable.wip_asset, "Work In Progress", "Something cool is happening! sit tight and wait :)");
         return view;
     }
 

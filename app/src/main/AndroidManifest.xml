@@ -20,41 +20,37 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <!--<service android:name=".component.helper.MessagingService">-->
-            <!--<intent-filter>-->
-                <!--<action android:name="com.google.firebase.MESSAGING_EVENT" />-->
-            <!--</intent-filter>-->
-        <!--</service>-->
-        <!--<service android:name=".component.helper.FirebaseInstanceService">-->
-            <!--<intent-filter>-->
-                <!--<action android:name="com.google.firebase.INSTANCE_ID_EVENT" />-->
-            <!--</intent-filter>-->
-        <!--</service>-->
-
+        <activity android:name=".view.impl.TopupActivity" />
+        <!-- <service android:name=".component.helper.MessagingService"> -->
+        <!-- <intent-filter> -->
+        <!-- <action android:name="com.google.firebase.MESSAGING_EVENT" /> -->
+        <!-- </intent-filter> -->
+        <!-- </service> -->
+        <!-- <service android:name=".component.helper.FirebaseInstanceService"> -->
+        <!-- <intent-filter> -->
+        <!-- <action android:name="com.google.firebase.INSTANCE_ID_EVENT" /> -->
+        <!-- </intent-filter> -->
+        <!-- </service> -->
         <meta-data
             android:name="com.google.android.gms.version"
-            android:value="@integer/google_play_services_version" />
-
-        <!--<provider-->
-            <!--android:name=".component.helper.FreshchatProvider"-->
-            <!--android:authorities="${applicationId}.com.need.unknown.provider"-->
-            <!--android:exported="false"-->
-            <!--android:grantUriPermissions="true">-->
-            <!--<meta-data-->
-                <!--android:name="android.support.FILE_PROVIDER_PATHS"-->
-                <!--android:resource="@xml/freshchat_file_provider_paths" />-->
-        <!--</provider>-->
-
-        <!--<provider-->
-            <!--android:name=".component.helper.ContentProvider"-->
-            <!--android:authorities="${applicationId}.com.need.unknown.provider"-->
-            <!--android:exported="false"-->
-            <!--android:grantUriPermissions="true">-->
-            <!--<meta-data-->
-                <!--android:name="android.support.FILE_PROVIDER_PATHS"-->
-                <!--android:resource="@xml/provider_paths" />-->
-        <!--</provider>-->
-
+            android:value="@integer/google_play_services_version" /> <!-- <provider -->
+        <!-- android:name=".component.helper.FreshchatProvider" -->
+        <!-- android:authorities="${applicationId}.com.need.unknown.provider" -->
+        <!-- android:exported="false" -->
+        <!-- android:grantUriPermissions="true"> -->
+        <!-- <meta-data -->
+        <!-- android:name="android.support.FILE_PROVIDER_PATHS" -->
+        <!-- android:resource="@xml/freshchat_file_provider_paths" /> -->
+        <!-- </provider> -->
+        <!-- <provider -->
+        <!-- android:name=".component.helper.ContentProvider" -->
+        <!-- android:authorities="${applicationId}.com.need.unknown.provider" -->
+        <!-- android:exported="false" -->
+        <!-- android:grantUriPermissions="true"> -->
+        <!-- <meta-data -->
+        <!-- android:name="android.support.FILE_PROVIDER_PATHS" -->
+        <!-- android:resource="@xml/provider_paths" /> -->
+        <!-- </provider> -->
         <activity android:name=".view.impl.CustomerServiceActivity" />
         <activity android:name=".view.impl.RegisterActivity" />
         <activity
